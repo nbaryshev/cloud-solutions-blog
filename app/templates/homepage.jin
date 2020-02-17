@@ -1,0 +1,5 @@
+{% extends 'base.jin' %}
+
+{% block main %}
+    <p>Just my main page</p>
+{% endblock %}

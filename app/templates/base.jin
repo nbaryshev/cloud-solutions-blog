@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+</head>
+
+<nav>
+    <a href="{{ url_for('homepage') }}">Home</a>
+    <a href="{{ url_for('history') }}">History</a>
+    <a href="{{ url_for('building') }}">Building tips</a>
+    <a href="{{ url_for('newpost') }}">New Post</a>
+
+</nav>
+
+{% block main %}
+{% endblock %}
+
+</html>

@@ -1,0 +1,29 @@
+{% extends 'base.jin' %}
+
+{% block main %}
+
+<form action="" method = "POST">
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.topic.label }}
+        {{ form.topic() }}
+    </p>
+
+    <p>
+        {{ form.heading.label }}
+        {{ form.heading() }}
+    </p>
+
+    <p>
+        {{ form.post_text.label }}
+        {{ form.post_text() }}
+    </p>
+
+    <p>
+        {{ form.submit() }}
+    </p>
+
+</form>
+
+{% endblock %}
