@@ -10,7 +10,7 @@
 <body>
 <div class="row">
     <div class="col-md-3"></div>
-    <div class="col-md-6">
+    <div class="col-md-6 navbar">
         <nav>
     <a href="{{ url_for('homepage') }}">Home</a>
     <a href="{{ url_for('history') }}">History</a>
