@@ -7,8 +7,8 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
         <nav>
     <a href="{{ url_for('homepage') }}">Home</a>
     <a href="{{ url_for('history') }}">History</a>
@@ -16,15 +16,15 @@
     <a href="{{ url_for('newpost') }}">New Post</a>
         </nav>
     </div>
-    <div class="col-sm-4"></div>
+    <div class="col-md-4"></div>
 </div>
 
 <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
 <div><img src="{{ url_for('static', filename='images/cloud-main.jpg') }}" alt=""></div>
     </div>
-    <div class="col-sm-4"></div>
+    <div class="col-md-4"></div>
 </div>
 
 {% block main %}
