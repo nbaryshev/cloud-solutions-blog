@@ -44,6 +44,6 @@ def newpost():
 
 @app.route('/history/<int:post_id>')
 def post(post_id):
-    current_post = models.Post.query.filter_by(id=post_id).first()
+    current_post = models.Post.query.filter_by(post_id=post_id).first()
 
     return flask.render_template('post.jin', post=current_post)

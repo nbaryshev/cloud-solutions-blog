@@ -3,7 +3,7 @@
 {% block main %}
 {% for post in posts %}
 <div>
-    <p><h2><a href="{{ url_for('post', post_id=post.id) }}">{{ post.heading }}</a></h2></p>
+    <p><h2><a href="{{ url_for('post', post_id=post.post_id) }}">{{ post.heading }}</a></h2></p>
     <p>{{ post.post_text}}</p>
     <p>The post was added at: {{ post.post_time }}</p>
 </div>
