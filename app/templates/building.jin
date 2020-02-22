@@ -2,11 +2,14 @@
 
 {% block main %}
 {% for post in posts %}
-<div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
 <p><h2>{{ post.heading }}</h2></p>
     <p>{{ post.post_text}}</p>
     <p>The post was added at: {{ post.post_time }}</p>
-
+    </div>
+    <div class="col-md-3"></div>
 </div>
 {% endfor %}
 {% endblock %}
