@@ -8,30 +8,33 @@
     <title>My Blog</title>
 </head>
 <body>
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 navbar">
-        <nav>
-    <a href="{{ url_for('homepage') }}">Home</a>
-    <a href="{{ url_for('history') }}">History</a>
-    <a href="{{ url_for('building') }}">Building tips</a>
-    <a href="{{ url_for('newpost') }}">New Post</a>
-        </nav>
+<div class="container wrapper">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 navbar">
+            <nav>
+        <a href="{{ url_for('homepage') }}">Home</a>
+        <a href="{{ url_for('history') }}">History</a>
+        <a href="{{ url_for('building') }}">Building tips</a>
+        <a href="{{ url_for('newpost') }}">New Post</a>
+            </nav>
+        </div>
+        <div class="col-md-3"></div>
     </div>
-    <div class="col-md-3"></div>
-</div>
 
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-<img src="{{ url_for('static', filename='images/cloud-main.jpg') }}" id="main-picture" alt="">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+    <img src="{{ url_for('static', filename='images/cloud-main.jpg') }}" id="main-picture" alt="">
+        </div>
+        <div class="col-md-3"></div>
     </div>
-    <div class="col-md-3"></div>
+
 </div>
-
-
+<div class="wrapper container">
 {% block main %}
 {% endblock %}
+</div>
 
 </body>
 
