@@ -17,7 +17,7 @@ def history():
     History of bike constructions
     """
     # Retrieving every posts with topic 'History'
-    history_posts = models.Post.query.filter_by(topic='History').all()
+    history_posts = models.Post.query.filter_by(topic='history').all()
     return flask.render_template('history.jin', posts=history_posts)
 
 
@@ -39,11 +39,13 @@ def newpost():
             #Post creation
             post = post_form.create_post_object()
 
+            print(post_form.topic.data.lower())
+
             # Check if topic is history to redirect to the good page
-            if post.topic.data.lower() == 'history':  # Check case insensitive
+            if post_form.topic.data.lower() == 'history':  # Check case insensitive
                 return flask.redirect(flask.url_for('history'))
 
-            elif post.topic.data.lower() == 'building':
+            elif post_form.topic.data.lower() == 'building':
                 return flask.redirect(flask.url_for('building'))
 
             # Maybe return flask.redirect(flask.url_for(post.topic.lower()))) --> If name of the endpoint is always
