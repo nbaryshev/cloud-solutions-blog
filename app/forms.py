@@ -30,6 +30,18 @@ class SignUp(flask_wtf.FlaskForm):
     pwd = wtforms.PasswordField('Password: ', validators=[DataRequired()])
     submit = wtforms.SubmitField('Sign Up')
 
+    def create_user(self):
+        """
+        Creates new user
+        """
+        # Retrieve data from form
+        name = self.name
+        email = self.email
+        pwd = self.pwd
+
+        # new_user =
+
+
 class SignIn(flask_wtf.FlaskForm):
     email = wtforms.StringField('E-mail: ', validators=[DataRequired()])
     pwd = wtforms.PasswordField('Password', validators=[DataRequired()])

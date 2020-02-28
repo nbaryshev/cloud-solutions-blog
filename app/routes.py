@@ -71,6 +71,6 @@ def post(post_id):
 
     return flask.render_template('post.jin', post=current_post)
 
-# Why did I comment this ? (TODO)
+
 # @app.route('/sign-up', methods=('GET', 'POST'))
 # def signup():

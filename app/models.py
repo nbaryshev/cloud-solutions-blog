@@ -1,5 +1,6 @@
-from app import db, models
-import datetime
+from app import db, models, login_mngr
+import datetime, flask_login
+from werkzeug.security import check_password_hash, generate_password_hash
 
 class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True)
@@ -30,3 +31,9 @@ class Post(db.Model):
             self.post_time.minute
         )
 
+
+class User(flask_login.UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    email = db.Column(db.String(64))
+    pwd = db.Column(db.String(64))
