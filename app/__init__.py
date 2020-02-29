@@ -7,6 +7,7 @@ import flask_login
 # basedir = os.path.abspath(os.path.dirname(__file__))
 if "ON_HEROKU" in os.environ:
     on_heroku = True
+
 else:
     on_heroku = False
 

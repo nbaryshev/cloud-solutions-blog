@@ -37,3 +37,15 @@ class User(flask_login.UserMixin, db.Model):
     name = db.Column(db.String(64))
     email = db.Column(db.String(64))
     pwd = db.Column(db.String(64))
+
+    @classmethod
+    def create_user(cls, name=None, email=None, pwd=None):
+        """
+        creates new user
+        """
+
+        new_user = User(name=name, email=email, pwd=pwd)
+        db.session.add(new_user)
+        db.session.commit()
+
+        return new_user

@@ -39,8 +39,6 @@ def newpost():
             #Post creation
             post = post_form.create_post_object()
 
-            print(post_form.topic.data.lower())
-
             # Check if topic is history to redirect to the good page
             if post_form.topic.data.lower() == 'history':  # Check case insensitive
                 return flask.redirect(flask.url_for('history'))
@@ -72,5 +70,21 @@ def post(post_id):
     return flask.render_template('post.jin', post=current_post)
 
 
-# @app.route('/sign-up', methods=('GET', 'POST'))
-# def signup():
+@app.route('/sign-up', methods=('GET', 'POST'))
+def signup():
+    """
+    Sign up form for users
+    """
+
+    #Creates Sign Up form
+    sign_up = forms.SignUp()
+
+    if flask.request.method == 'POST':
+        if sign_up.validate_on_submit():
+
+            #Creates new user
+            new_user = sign_up.create_user()
+
+            return flask.redirect(flask.url_for('homepage'))
+
+    return flask.render_template('signup.jin', form=sign_up)

@@ -1,2 +1,2 @@
-1. Margins
-2. How to manage page oversizing
+1. routes - "post", "new_user" remain unused - is it ok?
+2. model - create_new_user() - has a highlight

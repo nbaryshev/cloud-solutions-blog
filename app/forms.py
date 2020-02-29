@@ -35,13 +35,16 @@ class SignUp(flask_wtf.FlaskForm):
         Creates new user
         """
         # Retrieve data from form
-        name = self.name
-        email = self.email
-        pwd = self.pwd
+        name = self.name.data
+        email = self.email.data
+        pwd = self.pwd.data
 
-        # new_user =
+        new_user = models.User.create_user(name, email, pwd)
+
+        return new_user
 
 
 class SignIn(flask_wtf.FlaskForm):
     email = wtforms.StringField('E-mail: ', validators=[DataRequired()])
-    pwd = wtforms.PasswordField('Password', validators=[DataRequired()])
+    pwd = wtforms.PasswordField('Password: ', validators=[DataRequired()])
+

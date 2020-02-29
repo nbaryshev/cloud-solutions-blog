@@ -1,0 +1,29 @@
+ {% extends 'base.jin' %}
+
+{% block main %}
+
+ <h2>Sign Up form</h2>
+
+ <form action="" method="POST">
+        {{ form.hidden_tag() }}
+     <p>
+        {{ form.name.label }}
+        {{ form.name() }}
+     </p>
+
+    <p>
+        {{ form.email.label }}
+        {{ form.email() }}
+    </p>
+
+    <p>
+        {{ form.pwd.label }}
+        {{ form.pwd() }}
+    </p>
+
+    <p>
+        {{ form.submit() }}
+    </p>
+ </form>
+
+ {% endblock %}
