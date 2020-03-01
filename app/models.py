@@ -31,10 +31,6 @@ class Post(db.Model):
             self.post_time.minute
         )
 
-
-
-
-
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
