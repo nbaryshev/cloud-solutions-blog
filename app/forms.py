@@ -39,7 +39,7 @@ class SignUp(flask_wtf.FlaskForm):
         email = self.email.data
         pwd = self.pwd.data
 
-        new_user = models.User.create_user(name, email, pwd)
+        new_user = models.User.create_user(name=name, email=email, pwd=pwd)
 
         return new_user
 
@@ -47,4 +47,18 @@ class SignUp(flask_wtf.FlaskForm):
 class SignIn(flask_wtf.FlaskForm):
     email = wtforms.StringField('E-mail: ', validators=[DataRequired()])
     pwd = wtforms.PasswordField('Password: ', validators=[DataRequired()])
+    remember = wtforms.BooleanField('Remember me ')
+    submit = wtforms.SubmitField('Submit')
+
+    def signin_user(self):
+
+        email = self.email.data
+        pwd = self.pwd.data
+        remember = self.remember.data
+
+        good = models.User.sign_in(email, pwd, remember)
+
+        return good
+
+
 

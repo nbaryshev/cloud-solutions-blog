@@ -88,3 +88,22 @@ def signup():
             return flask.redirect(flask.url_for('homepage'))
 
     return flask.render_template('signup.jin', form=sign_up)
+
+@app.route('/sign-in', methods=('GET', 'POST'))
+def signin():
+    """
+    Sign in form for those who was already signed up before
+    """
+    signin_form = forms.SignIn()
+
+    if flask.request.method == 'POST':
+        if signin_form.validate_on_submit():
+
+            success = signin_form.signin_user()
+
+            if success:
+                flask.redirect(flask.url_for('homepage'))
+            else:
+                return flask.redirect((flask.url_for('signin', form=signin_form)))
+
+    return flask.render_template('signin.jin', form=signin_form)

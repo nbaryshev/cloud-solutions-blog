@@ -32,11 +32,30 @@ class Post(db.Model):
         )
 
 
+
+
+
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(64))
     pwd = db.Column(db.String(64))
+
+    def change_pwd(self, pwd):
+        hashed_pwd = generate_password_hash(pwd)
+        self.pwd = hashed_pwd
+        db.session.commit()
+
+    def check_pwd(self, pwd):
+        """
+
+        :param pwd:
+        :return: Boolean
+        """
+        return check_password_hash(self.pwd, pwd)
+
+    def get_id(self):
+        return self.id
 
     @classmethod
     def create_user(cls, name=None, email=None, pwd=None):
@@ -44,8 +63,36 @@ class User(flask_login.UserMixin, db.Model):
         creates new user
         """
 
-        new_user = User(name=name, email=email, pwd=pwd)
+        new_user = cls(name=name, email=email)
+        new_user.change_pwd(pwd)
+
         db.session.add(new_user)
         db.session.commit()
 
         return new_user
+
+    @classmethod
+    def sign_in(cls, email, pwd, remember=False):
+        user = cls.get_by_email(email=email)
+        good_pwd = user.check_pwd(pwd)
+        if good_pwd:
+            flask_login.login_user(user, remember=remember)
+
+        return good_pwd
+
+    @classmethod
+    def get_by_email(cls, email):
+        """
+        Retrieves User by pwd for Sign In
+        """
+        user = User.query.filter_by(email=email).first()
+
+        return user
+
+    @login_mngr.user_loader
+    @staticmethod
+    def load_user(user_id):
+        user_id = int(user_id)
+        return User.query.get(user_id)
+
+
