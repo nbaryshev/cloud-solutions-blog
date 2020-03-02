@@ -5,7 +5,7 @@ import flask_migrate
 import flask_login
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
-if "ON_HEROKU" in os.environ:
+if "ONHEROKU" in os.environ:
     on_heroku = True
 
 else:
