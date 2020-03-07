@@ -1,5 +1,5 @@
 from app import app, models, db, forms
-import flask
+import flask, flask_login
 
 @app.route('/')
 def homepage():
@@ -63,12 +63,31 @@ def newpost():
     return flask.render_template('newpost.jin', form=post_form)
 
 
-@app.route('/history/<int:post_id>')
+@app.route('/history/<int:post_id>', methods=('GET', 'POST'))
 def post(post_id):
+    """
+    :param post_id:
+    :return: Specific post you clicked in the feed + comments to it
+    """
+
+    # Retreive the post user clicked at by receiving its id. post_id retrieves from 'history' page
     current_post = models.Post.query.filter_by(post_id=post_id).first()
 
-    return flask.render_template('post.jin', post=current_post)
+    #Retreive all comments related to the current_post
+    comments = current_post.comments
 
+    comment_form = forms.NewComment()
+
+    if flask.request.method == "POST":
+        if comment_form.validate_on_submit():
+
+            new_comment = comment_form.get_comment(post_id)
+            current_post.add_comment(new_comment)
+            flask_login.current_user.add_comment(new_comment)
+
+        return flask.redirect(flask.url_for('post', post_id=post_id))
+
+    return flask.render_template('post.jin', post=current_post, comments=comments, form=comment_form)
 
 @app.route('/sign-up', methods=('GET', 'POST'))
 def signup():
@@ -102,8 +121,19 @@ def signin():
             success = signin_form.signin_user()
 
             if success:
-                flask.redirect(flask.url_for('homepage'))
+                return flask.redirect(flask.url_for('homepage'))
             else:
                 return flask.redirect((flask.url_for('signin', form=signin_form)))
 
     return flask.render_template('signin.jin', form=signin_form)
+
+
+@app.route('/sign-out')
+def signout():
+    """
+    User Sign out
+    """
+
+    models.User.signout()
+
+    return flask.redirect(flask.url_for('homepage'))

@@ -10,4 +10,41 @@
     </div>
     <div class="col-md-3"></div>
 </div>
+
+<!-- Displaying comments -->
+
+{% if comments %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+    {% for comment in comments %}
+        <h1>{{ comment.user.name }}</h1>
+        <h2>{{ comment.users_comment }}</h2>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+    {% endfor %}
+
+{% else %}
+
+<h1>No comments for now</h1>
+
+{% endif %}
+
+<!-- Comments Form -->
+
+<form action="" method="POST">
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.comment.label }}
+        {{ form.comment() }}
+    </p>
+
+    <p>
+        {{ form.submit() }}
+    </p>
+
+</form>
+
 {% endblock %}

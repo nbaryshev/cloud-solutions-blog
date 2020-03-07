@@ -14,10 +14,16 @@
         <div class="col-md-6 navbar">
             <!--  Start navbar -->
             <nav>
-        <a href="{{ url_for('homepage') }}">Home</a>
-        <a href="{{ url_for('history') }}">History</a>
-        <a href="{{ url_for('building') }}">Building tips</a>
-        <a href="{{ url_for('newpost') }}">New Post</a>
+                <a href="{{ url_for('homepage') }}">Home</a>
+                <a href="{{ url_for('history') }}">History</a>
+                <a href="{{ url_for('building') }}">Building tips</a>
+                <a href="{{ url_for('newpost') }}">New Post</a>
+                {% if current_user.is_anonymous %}
+                <a href="{{ url_for('signup') }}">Sign Up</a>
+                <a href="{{ url_for('signin') }}">Sign In</a>
+                {% else %}
+                <a href="{{ url_for('signout') }}">Sign Out</a>
+                {% endif %}
             </nav>
             <!-- End navbar -->
         </div>

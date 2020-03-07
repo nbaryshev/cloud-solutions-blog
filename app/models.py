@@ -8,6 +8,7 @@ class Post(db.Model):
     heading = db.Column(db.String)
     post_text = db.Column(db.String)
     post_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    comments = db.relationship('Comment', backref='post') # one Post may have many comments(one-to-many with Comments table) ?
 
     @classmethod
     def create_post(cls, topic=None, heading=None, post_text=None, post_time=None):
@@ -31,11 +32,23 @@ class Post(db.Model):
             self.post_time.minute
         )
 
+    def add_comment(self, comment):
+        self.comments.append(comment)
+        db.session.commit()
+
+
+@login_mngr.user_loader
+def load_user(user_id):
+    user_id = int(user_id)
+    return User.query.get(user_id)
+
+
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     email = db.Column(db.String(64))
     pwd = db.Column(db.String(64))
+    comments = db.relationship('Comment', backref='user') # one User may have many comments(one-to-many with Comments table)
 
     def change_pwd(self, pwd):
         hashed_pwd = generate_password_hash(pwd)
@@ -52,6 +65,10 @@ class User(flask_login.UserMixin, db.Model):
 
     def get_id(self):
         return self.id
+
+    def add_comment(self, comment):
+        self.comments.append(comment)
+        db.session.commit()
 
     @classmethod
     def create_user(cls, name=None, email=None, pwd=None):
@@ -85,10 +102,28 @@ class User(flask_login.UserMixin, db.Model):
 
         return user
 
-    @login_mngr.user_loader
-    @staticmethod
-    def load_user(user_id):
-        user_id = int(user_id)
-        return User.query.get(user_id)
+    @classmethod
+    def signout(cls):
+        flask_login.logout_user()
 
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    users_comment = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.post_id'))
+
+    @classmethod
+    def create_comment(cls, users_comment, post_id):
+        """
+        Create new comment
+        """
+        new_comment = cls(users_comment=users_comment, post_id=post_id)
+
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return new_comment
+
+
+#TODO Try user_id = current user

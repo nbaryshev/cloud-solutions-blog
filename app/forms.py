@@ -60,5 +60,16 @@ class SignIn(flask_wtf.FlaskForm):
 
         return good
 
+class NewComment(flask_wtf.FlaskForm):
+    comment = wtforms.StringField()
+    submit = wtforms.SubmitField('Submit')
+
+    def get_comment(self, post_id):
+
+        comment = self.comment.data
+
+        new_comment = models.Comment.create_comment(comment, post_id)
+
+        return new_comment
 
 

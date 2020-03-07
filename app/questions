@@ -1,8 +1,1 @@
-1. routes - "post", "new_user" remain unused - is it ok?
-2. models - create_new_user() - has a highlight
-3. models - what is the difference between class methods and object methods? why "get_id" is not a class method?
-4. models - why @login_mngr should in models? What is the logic/rule
-5. how to keep users loged in after they just signed up?
-
-
-6. How to reach my Database at Heroku? Why I can't see User table?
+1. Current user name
