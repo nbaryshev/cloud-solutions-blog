@@ -6,7 +6,9 @@ def homepage():
     """
     Display homepage
     """
-    rendered = flask.render_template('homepage.jin')
+    all_posts = models.Post.query.order_by(models.Post.post_time.desc()).all()
+
+    rendered = flask.render_template('homepage.jin', posts=all_posts)
 
     return rendered
 
@@ -17,21 +19,24 @@ def history():
     History of bike constructions
     """
     # Retrieving every posts with topic 'History'
-    history_posts = models.Post.query.filter_by(topic='history').all()
+    history_posts = models.Post.query.filter_by(topic='history').order_by(models.Post.post_time.desc()).all()
     return flask.render_template('history.jin', posts=history_posts)
 
 
 @app.route('/building')
 def building():
-    building_posts = models.Post.query.filter_by(topic='Building').all()
+    building_posts = models.Post.query.filter_by(topic='building').order_by(models.Post.post_time.desc()).all()
     return flask.render_template('building.jin', posts=building_posts)
 
 
 @app.route('/new-post', methods=('GET', 'POST'))
 def newpost():
 
-    # Create new post form
+    # New post form
     post_form = forms.NewPost()
+
+    # # Image uploading form
+    # upload_img = forms.Upload()
 
     if flask.request.method == 'POST':
         if post_form.validate_on_submit():
@@ -58,13 +63,13 @@ def newpost():
             # return flask.redirect(flask.url_for(endpoints[post.topic.lower()]))
 
         else:
-            return flask.render_template('newpost.jin', form=post_form)
+            return flask.render_template('newpost.jin', form=post_form, upload_form=upload_img)
 
-    return flask.render_template('newpost.jin', form=post_form)
+    return flask.render_template('newpost.jin', form=post_form, upload_form=upload_img)
 
 
-@app.route('/history/<int:post_id>', methods=('GET', 'POST'))
-def post(post_id):
+@app.route('/<topic>/<int:post_id>', methods=('GET', 'POST'))
+def post(topic, post_id):
     """
     :param post_id:
     :return: Specific post you clicked in the feed + comments to it
@@ -85,9 +90,9 @@ def post(post_id):
             current_post.add_comment(new_comment)
             flask_login.current_user.add_comment(new_comment)
 
-        return flask.redirect(flask.url_for('post', post_id=post_id))
+        return flask.redirect(flask.url_for('post', topic=topic, post_id=post_id))
 
-    return flask.render_template('post.jin', post=current_post, comments=comments, form=comment_form)
+    return flask.render_template('post.jin', topic=topic, post=current_post, comments=comments, form=comment_form)
 
 @app.route('/sign-up', methods=('GET', 'POST'))
 def signup():

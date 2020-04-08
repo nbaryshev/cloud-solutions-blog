@@ -1,38 +1,40 @@
 {% extends 'base.jin' %}
 
 {% block main %}
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <p><h2>{{ post.heading }}</h2></p>
-<p>{{ post.post_text}}</p>
-<p>The post was added at: {{ post.post_time }}</p>
-    </div>
-    <div class="col-md-3"></div>
-</div>
 
-<!-- Displaying comments -->
-
-{% if comments %}
 <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-    {% for comment in comments %}
-        <h1>{{ comment.user.name }}</h1>
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+              <h1>{{ post.heading }}</h1>
+          </div>
+            <p>{{ post.post_text}}</p>
+            <div class="post-preview">
+            <p class="post-meta">Posted on {{ post.get_human_time() }}</p>
+            </div>
+            <hr>
+        <h1><i>Comments</i></h1>
+            {% if comments %}
+            {% for comment in comments %}
+            <br>
+        <h5>{{ comment.user.name }}</h5>
+
         <h2>{{ comment.users_comment }}</h2>
-    </div>
-    <div class="col-md-3"></div>
-</div>
-    {% endfor %}
+                <div class="post-preview">
+            <p class="post-meta">Commented on {{ comment.get_comment_time() }}</p>
+                </div>
 
-{% else %}
+            {% endfor %}
 
-<h1>No comments for now</h1>
+            {% else %}
 
-{% endif %}
+            <div class="post-preview">
+            <p class="post-meta">No comments for now</p>
 
-<!-- Comments Form -->
+            {% endif %}
 
+            <!-- Comments Form -->
+
+{% if current_user.is_authenticated %}
 <form action="" method="POST">
     {{ form.hidden_tag() }}
 
@@ -46,5 +48,11 @@
     </p>
 
 </form>
+{% else %}
+<p>Only authorized users can leave comments <a href="{{ url_for('signup') }}">Sign Up</a> | <a href="{{ url_for('signin') }}">Sign In</a></p>
+{% endif %}
+        </div>
+</div>
 
-{% endblock %}
+
+            {% endblock %}

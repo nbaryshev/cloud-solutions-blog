@@ -4,6 +4,7 @@ import flask_sqlalchemy
 import flask_migrate
 import flask_login
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 # if "ONHEROKU" in os.environ:
 #     on_heroku = True

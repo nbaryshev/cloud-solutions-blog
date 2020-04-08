@@ -2,14 +2,23 @@
 
 {% block main %}
 {% for post in posts %}
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-    <p><h2><a href="{{ url_for('post', post_id=post.post_id) }}">{{ post.heading }}</a></h2></p>
-    <p>{{ post.post_text}}</p>
-    <p>The post was added at: {{ post.post_time }}</p>
+
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+          <a href="{{ url_for('post', topic=post.topic, post_id=post.post_id) }}">
+              <h2 class="post-title">
+                  {{ post.heading }}
+                  </h2>
+                <h3 class="post-subtitle">
+                  {{ post.post_text}}
+                  </h3>
+                </a>
+              <p class="post-meta">Posted on {{ post.get_human_time()}}</p>
+              <hr>
+        </div>
+      </div>
     </div>
-    <div class="col-md-3"></div>
-</div>
+
 {% endfor %}
 {% endblock %}

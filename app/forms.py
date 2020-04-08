@@ -11,6 +11,7 @@ class NewPost(flask_wtf.FlaskForm):
     topic = wtforms.SelectField('Choose the topic', choices=choices, validators=[DataRequired()])
     heading = wtforms.StringField('Heading')
     post_text = wtforms.StringField('Post text')
+    image = wtforms.FileField('Post image')
     submit = wtforms.SubmitField('Post')
 
     def create_post_object(self):
@@ -40,6 +41,8 @@ class SignUp(flask_wtf.FlaskForm):
         pwd = self.pwd.data
 
         new_user = models.User.create_user(name=name, email=email, pwd=pwd)
+        sign_in_new_user_auto = models.User.sign_in(email, pwd, remember=True)
+
 
         return new_user
 
@@ -60,7 +63,9 @@ class SignIn(flask_wtf.FlaskForm):
 
         return good
 
+
 class NewComment(flask_wtf.FlaskForm):
+
     comment = wtforms.StringField()
     submit = wtforms.SubmitField('Submit')
 
@@ -73,3 +78,7 @@ class NewComment(flask_wtf.FlaskForm):
         return new_comment
 
 
+# class Upload(flask_wtf.FlaskForm):
+#
+#     image = wtforms.FileField('image')
+#     upload = wtforms.SubmitField('Upload')

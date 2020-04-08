@@ -24,7 +24,7 @@ class Post(db.Model):
 
     #Retrieve a posting time for specific post in a readable format
     def get_human_time(self):
-        return "{}/{}/{} at {}:{}".format(
+        return "{}-{}-{} at {}:{}".format(
             self.post_time.day,
             self.post_time.month,
             self.post_time.year,
@@ -112,6 +112,7 @@ class Comment(db.Model):
     users_comment = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.post_id'))
+    comment_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     @classmethod
     def create_comment(cls, users_comment, post_id):
@@ -125,5 +126,11 @@ class Comment(db.Model):
 
         return new_comment
 
-
-#TODO Try user_id = current user
+    def get_comment_time(self):
+        return "{}-{}-{} at {}:{}".format(
+            self.comment_time.day,
+            self.comment_time.month,
+            self.comment_time.year,
+            self.comment_time.hour,
+            self.comment_time.minute
+        )
