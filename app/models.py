@@ -7,16 +7,17 @@ class Post(db.Model):
     topic = db.Column(db.String(64))
     heading = db.Column(db.String)
     post_text = db.Column(db.String)
+    post_image = db.Column(db.String)
     post_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     comments = db.relationship('Comment', backref='post') # one Post may have many comments(one-to-many with Comments table) ?
 
     @classmethod
-    def create_post(cls, topic=None, heading=None, post_text=None, post_time=None):
+    def create_post(cls, topic=None, heading=None, post_text=None, post_time=None, post_image=None):
         # Apply filters
         topic = topic.lower()
 
         # Create obj
-        new_post = models.Post(topic=topic, heading=heading, post_text=post_text, post_time=post_time)
+        new_post = models.Post(topic=topic, heading=heading, post_text=post_text, post_time=post_time, post_image=post_image)
         db.session.add(new_post)
         db.session.commit()
 
@@ -48,6 +49,7 @@ class User(flask_login.UserMixin, db.Model):
     name = db.Column(db.String(64))
     email = db.Column(db.String(64))
     pwd = db.Column(db.String(64))
+    user_image = db.Column(db.String)
     comments = db.relationship('Comment', backref='user') # one User may have many comments(one-to-many with Comments table)
 
     def change_pwd(self, pwd):
@@ -57,7 +59,6 @@ class User(flask_login.UserMixin, db.Model):
 
     def check_pwd(self, pwd):
         """
-
         :param pwd:
         :return: Boolean
         """
@@ -71,12 +72,12 @@ class User(flask_login.UserMixin, db.Model):
         db.session.commit()
 
     @classmethod
-    def create_user(cls, name=None, email=None, pwd=None):
+    def create_user(cls, name=None, email=None, pwd=None, user_image=None):
         """
         creates new user
         """
 
-        new_user = cls(name=name, email=email)
+        new_user = cls(name=name, email=email, user_image=user_image)
         new_user.change_pwd(pwd)
 
         db.session.add(new_user)

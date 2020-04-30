@@ -17,6 +17,7 @@ p {
 
 p a {
   text-decoration: underline;
+  overflow-wrap: break-word;
 }
 
 h1,
@@ -303,6 +304,11 @@ header.masthead .post-heading .meta a {
   text-decoration: underline;
   color: #0085A1;
 }
+
+.line-wrapper-1 {
+  overflow-wrap: break-word;
+}
+
 
 @media only screen and (min-width: 768px) {
   .post-preview > a > .post-title {

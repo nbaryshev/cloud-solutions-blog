@@ -12,6 +12,7 @@
               <h2 class="post-title">
                   {{ post.heading }}
                   </h2>
+              <p><img src="static/images/{{ post.post_image }}" alt="" width="800px" height="auto"></p>
 
               <h3 class="post-subtitle">
                   {{ post.post_text}}

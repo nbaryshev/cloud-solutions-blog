@@ -6,6 +6,10 @@
 
  <form action="" method="POST">
         {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+     <p>
+         {{ form.user_image }}
+     </p>
      <p>
         {{ form.name.label }}
         {{ form.name() }}

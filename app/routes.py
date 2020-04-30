@@ -63,9 +63,9 @@ def newpost():
             # return flask.redirect(flask.url_for(endpoints[post.topic.lower()]))
 
         else:
-            return flask.render_template('newpost.jin', form=post_form, upload_form=upload_img)
+            return flask.render_template('newpost.jin', form=post_form)
 
-    return flask.render_template('newpost.jin', form=post_form, upload_form=upload_img)
+    return flask.render_template('newpost.jin', form=post_form)
 
 
 @app.route('/<topic>/<int:post_id>', methods=('GET', 'POST'))

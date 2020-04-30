@@ -11,8 +11,8 @@
 
     <p>
         <h4>Post photo:</h4>
-        {{ upload_form.csrf_token }}
-        {{ upload_form.image }}
+        {{ form.csrf_token }}
+        {{ form.image }}
     </p>
 
     <p>
@@ -40,10 +40,5 @@
     <div class="col-md-3"></div>
 </div>
 
-<!--<form action="" method="POST" enctype="multipart/form-data">-->
-<!--    {{ upload_form.csrf_token }}-->
-<!--    {{ upload_form.image }}-->
-<!--    <p>{{ upload_form.upload() }}</p>-->
-<!--</form>-->
 
 {% endblock %}
