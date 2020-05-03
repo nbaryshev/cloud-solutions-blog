@@ -416,12 +416,19 @@ footer .copyright {
   padding: 25px 35px;
 }
 
+.container {
+ border-style: 10px solid red;
+}
+
 .post-title {
-overflow-wrap:break-word;
-word-wrap:break-word;
-hyphens:auto;
-position:relative;
-max-width:800px;
-display: inline-block;
-border : 1px solid red;
+    overflow-wrap:break-word;
+    word-wrap:break-word;
+    hyphens:auto;
+    position:relative;
+    /*max-width:800px;*/
+    display: inline-block;
+}
+
+.post-subtitle {
+ overflow-wrap:break-word;
 }

@@ -8,11 +8,11 @@ choices = [(topic, topic) for topic in topics]
 
 
 class NewPost(flask_wtf.FlaskForm):
-    topic = wtforms.SelectField('Choose the topic', choices=choices, validators=[DataRequired()])
-    heading = wtforms.StringField('Heading')
-    post_text = wtforms.StringField('Post text')
-    image = wtforms.FileField('Post image')
-    submit = wtforms.SubmitField('Post')
+    topic = wtforms.SelectField('Choose the topic', choices=choices)
+    heading = wtforms.TextAreaField('Heading')
+    post_text = wtforms.TextAreaField('Post text')
+    image = wtforms.FileField('Post image', [wtforms.validators.DataRequired()])
+    submit = wtforms.SubmitField('Create new post')
 
     def create_post_object(self):
         # Retrieve data from form
@@ -43,9 +43,8 @@ class SignUp(flask_wtf.FlaskForm):
         name = self.name.data
         email = self.email.data
         pwd = self.pwd.data
-        user_image = images.save(self.user_image.data)
 
-        new_user = models.User.create_user(name=name, email=email, pwd=pwd, user_image=user_image)
+        new_user = models.User.create_user(name=name, email=email, pwd=pwd)
         sign_in_new_user_auto = models.User.sign_in(email, pwd, remember=True)
 
         return new_user

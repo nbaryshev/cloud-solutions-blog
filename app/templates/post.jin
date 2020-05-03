@@ -7,7 +7,7 @@
           <div class="post-heading">
               <h1>{{ post.heading }}</h1>
           </div>
-            <p><img src="/static/images/{{ post.post_image }}" alt="" width="800px" height="600px"></p>
+            <p><img src="/static/images/{{ post.post_image }}" alt="" width="100%" height="auto"></p>
             <p>{{ post.post_text}}</p>
             <div class="post-preview">
             <p class="post-meta">Posted on {{ post.get_human_time() }}</p>

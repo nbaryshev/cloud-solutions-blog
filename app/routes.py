@@ -94,6 +94,7 @@ def post(topic, post_id):
 
     return flask.render_template('post.jin', topic=topic, post=current_post, comments=comments, form=comment_form)
 
+
 @app.route('/sign-up', methods=('GET', 'POST'))
 def signup():
     """
@@ -112,6 +113,7 @@ def signup():
             return flask.redirect(flask.url_for('homepage'))
 
     return flask.render_template('signup.jin', form=sign_up)
+
 
 @app.route('/sign-in', methods=('GET', 'POST'))
 def signin():
