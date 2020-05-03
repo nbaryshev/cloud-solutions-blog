@@ -2,23 +2,31 @@
 
 {% block main %}
 
-<form action="" method="POST">
+<div class="sign-wrapper">
+<form action="" method="POST" class="sign-form">
     {{ form.hidden_tag() }}
-    <p>
-    {{ form.email.label }}
-        {{ form.email() }}
-    </p>
-    <p>
-    {{ form.pwd.label }}
-        {{ form.pwd() }}
-    </p>
-    <p>
-        {{ form.remember.label }}
+
+    <div class="sign-element">
+         <h2>Sign In</h2>
+     </div>
+     <hr class="sign-element">
+    <div class="sign-element">
+    {{ form.email.label(class='sign-label') }}
+        {{ form.email(class="form-control") }}
+    </div>
+    <div class="sign-element">
+    {{ form.pwd.label(class='sign-label') }}
+        {{ form.pwd(class="form-control") }}
+    </div>
+    <div class="sign-element">
+        {{ form.remember.label(class='sign-label') }}
         {{ form.remember() }}
-    </p>
-    <p>
-        {{ form.submit() }}
-    </p>
+    </div>
+
+    <div class="sign-element btn-submit">
+        {{ form.submit(class='btn-custom') }}
+    </div>
 </form>
+</div>
 
 {% endblock %}

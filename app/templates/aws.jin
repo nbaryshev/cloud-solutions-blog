@@ -10,9 +10,9 @@
               <h2 class="post-title">
                   {{ post.heading }}
                   </h2>
-                <p><img src="static/images/{{ post.post_image }}" alt="" width="800px" height="400px"></p>
+                <p><img src="static/images/{{ post.post_image }}" alt="" width="100%" height="auto"></p>
               <h3 class="post-subtitle">
-                  {{ post.post_text}}
+                  {{ post.post_preview}}
                   </h3>
                 </a>
               <p class="post-meta">Posted on {{ post.get_human_time() }}</p>

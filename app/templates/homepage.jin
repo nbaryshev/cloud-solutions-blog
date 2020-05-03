@@ -15,7 +15,7 @@
               <p><img src="static/images/{{ post.post_image }}" alt="" width="100%" height="auto"></p>
 
               <h3 class="post-subtitle">
-                  {{ post.post_text}}
+                  {{ post.post_preview}}
                   </h3>
                 </a>
               <p class="post-meta">Posted on {{ post.get_human_time() }}</p>
@@ -24,16 +24,6 @@
       </div>
     </div>
 
-<!--<div class="row">-->
-<!--    <div class="col-md-3"></div>-->
-<!--    <div class="col-md-6">-->
-<!--    <p><h2><a href="{{ url_for('post', topic=post.topic, post_id=post.post_id) }}">{{ post.heading }}</a></h2></p>-->
-<!--        <p>{{ post.topic }}</p>-->
-<!--    <p>{{ post.post_text}}</p>-->
-<!--    <p>The post was added at: {{ post.post_time }}</p>-->
-<!--    </div>-->
-<!--    <div class="col-md-3"></div>-->
-<!--</div>-->
 {% endfor %}
 
 

@@ -4,20 +4,21 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True)
-    topic = db.Column(db.String(64))
+    topic = db.Column(db.String)
     heading = db.Column(db.String)
+    post_preview = db.Column(db.String)
     post_text = db.Column(db.String)
     post_image = db.Column(db.String)
     post_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     comments = db.relationship('Comment', backref='post') # one Post may have many comments(one-to-many with Comments table) ?
 
     @classmethod
-    def create_post(cls, topic=None, heading=None, post_text=None, post_time=None, post_image=None):
+    def create_post(cls, topic=None, heading=None, post_preview=None, post_text=None, post_time=None, post_image=None):
         # Apply filters
         topic = topic.lower()
 
         # Create obj
-        new_post = models.Post(topic=topic, heading=heading, post_text=post_text, post_time=post_time, post_image=post_image)
+        new_post = models.Post(topic=topic, heading=heading, post_preview=post_preview, post_text=post_text, post_time=post_time, post_image=post_image)
         db.session.add(new_post)
         db.session.commit()
 

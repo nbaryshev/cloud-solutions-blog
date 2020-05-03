@@ -10,7 +10,7 @@
             <p><img src="/static/images/{{ post.post_image }}" alt="" width="100%" height="auto"></p>
             <p>{{ post.post_text}}</p>
             <div class="post-preview">
-            <p class="post-meta">Posted on {{ post.get_human_time() }}</p>
+            <p class="post-meta meta-font">Posted on {{ post.get_human_time() }}</p>
             </div>
             <hr>
         <h1><i>Comments</i></h1>
@@ -18,11 +18,12 @@
             {% for comment in comments %}
             <br>
         <h5>{{ comment.user.name }}</h5>
+        {{ comment.users_comment }}
 
-        <h2>{{ comment.users_comment }}</h2>
                 <div class="post-preview">
-            <p class="post-meta">Commented on {{ comment.get_comment_time() }}</p>
+            <p class="post-meta meta-font">Commented on {{ comment.get_comment_time() }}</p>
                 </div>
+            <hr width="70%">
 
             {% endfor %}
 

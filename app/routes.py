@@ -13,20 +13,20 @@ def homepage():
     return rendered
 
 
-@app.route('/history')
-def history():
+@app.route('/azure')
+def azure():
     """
     History of bike constructions
     """
     # Retrieving every posts with topic 'History'
-    history_posts = models.Post.query.filter_by(topic='history').order_by(models.Post.post_time.desc()).all()
-    return flask.render_template('history.jin', posts=history_posts)
+    azure_posts = models.Post.query.filter_by(topic='microsoft azure').order_by(models.Post.post_time.desc()).all()
+    return flask.render_template('azure.jin', posts=azure_posts)
 
 
-@app.route('/building')
-def building():
-    building_posts = models.Post.query.filter_by(topic='building').order_by(models.Post.post_time.desc()).all()
-    return flask.render_template('building.jin', posts=building_posts)
+@app.route('/aws')
+def aws():
+    aws_posts = models.Post.query.filter_by(topic='aws').order_by(models.Post.post_time.desc()).all()
+    return flask.render_template('aws.jin', posts=aws_posts)
 
 
 @app.route('/new-post', methods=('GET', 'POST'))
@@ -35,9 +35,6 @@ def newpost():
     # New post form
     post_form = forms.NewPost()
 
-    # # Image uploading form
-    # upload_img = forms.Upload()
-
     if flask.request.method == 'POST':
         if post_form.validate_on_submit():
 
@@ -45,11 +42,11 @@ def newpost():
             post = post_form.create_post_object()
 
             # Check if topic is history to redirect to the good page
-            if post_form.topic.data.lower() == 'history':  # Check case insensitive
-                return flask.redirect(flask.url_for('history'))
+            if post_form.topic.data.lower() == 'microsoft azure':  # Check case insensitive
+                return flask.redirect(flask.url_for('azure'))
 
-            elif post_form.topic.data.lower() == 'building':
-                return flask.redirect(flask.url_for('building'))
+            elif post_form.topic.data.lower() == 'aws':
+                return flask.redirect(flask.url_for('aws'))
 
             # Maybe return flask.redirect(flask.url_for(post.topic.lower()))) --> If name of the endpoint is always
             # the name of the topic

@@ -2,32 +2,38 @@
 
 {% block main %}
 
- <h2>Sign Up form</h2>
+<div class="sign-wrapper">
+ <form action="" method="POST" class="sign-form">
 
- <form action="" method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.csrf_token }}
-     <p>
-         {{ form.user_image }}
-     </p>
-     <p>
-        {{ form.name.label }}
-        {{ form.name() }}
-     </p>
+     {{ form.hidden_tag() }}
+     {{ form.csrf_token }}
 
-    <p>
-        {{ form.email.label }}
-        {{ form.email() }}
-    </p>
+     <div class="sign-element">
+         <h2>Sign Up</h2>
+     </div>
+     <hr class="sign-element">
 
-    <p>
-        {{ form.pwd.label }}
-        {{ form.pwd() }}
-    </p>
+     <div class="sign-element">
+     {{ form.name.label(class='sign-label') }}<br>
+         {{ form.name(class="form-control") }}
+     </div>
 
-    <p>
-        {{ form.submit() }}
-    </p>
+     <div class="sign-element">
+        {{ form.email.label(class='sign-label') }}<br>
+        {{ form.email(class="form-control") }}
+     </div>
+
+     <div class="sign-element">
+        {{ form.pwd.label(class='sign-label') }}<br>
+        {{ form.pwd(class="form-control my-test-style") }}
+     </div>
+
+     <div class="sign-element btn-submit">
+        {{ form.submit(class='btn-custom') }}
+     </div>
+
  </form>
+
+</div>
 
  {% endblock %}
