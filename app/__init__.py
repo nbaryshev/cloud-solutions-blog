@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'sdjhgsjghlakjf'
 if "ON_HEROKU" in os.environ:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL_LOCAL']
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 app.config['UPLOADED_IMAGES_DEST'] = os.path.join(basedir, 'static/images')
 images = UploadSet('images', IMAGES)
@@ -26,3 +26,5 @@ migrate = flask_migrate.Migrate(app, db)
 login_mngr = flask_login.LoginManager(app)
 
 from app import routes, models
+
+# sqlite:////Users/nikita/Desktop/DevInst/Heroku/My_blog/app/app.db
