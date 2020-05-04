@@ -78,7 +78,7 @@ class User(flask_login.UserMixin, db.Model):
         creates new user
         """
 
-        new_user = cls(name=name, email=email)
+        new_user = cls(name=name, email=email, user_image=user_image)
         new_user.change_pwd(pwd)
 
         db.session.add(new_user)
