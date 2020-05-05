@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'sdjhgsjghlakjf'
 # if "ON_HEROKU" in os.environ:
 #     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 # else:
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 
 app.config['UPLOADED_IMAGES_DEST'] = os.path.join(basedir, 'static/images')
 images = UploadSet('images', IMAGES)
