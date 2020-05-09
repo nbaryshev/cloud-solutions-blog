@@ -70,7 +70,7 @@ class SignIn(flask_wtf.FlaskForm):
 
 class NewComment(flask_wtf.FlaskForm):
 
-    comment = wtforms.StringField()
+    comment = wtforms.TextAreaField()
     submit = wtforms.SubmitField('Submit')
 
     def get_comment(self, post_id):
