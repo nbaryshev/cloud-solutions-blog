@@ -65,7 +65,7 @@
     </div>
   </nav>
 
-    <header class="masthead" style="background-image:url('static/images/cloud-main.jpg')">
+    <header class="masthead" style="background-image:url({{'static/images/cloud-main.jpg'}})">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -82,7 +82,7 @@
 
 
 <!-- Main Content -->
-<div class="container">
+<div class="container" id="content-container">
 {% block main %}
 {% endblock %}
 </div>

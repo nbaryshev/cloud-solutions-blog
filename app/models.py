@@ -50,7 +50,6 @@ class User(flask_login.UserMixin, db.Model):
     name = db.Column(db.String(128))
     email = db.Column(db.String(128))
     pwd = db.Column(db.String(128))
-    user_image = db.Column(db.String(128))
     comments = db.relationship('Comment', backref='user') # one User may have many comments(one-to-many with Comments table)
 
     def change_pwd(self, pwd):
