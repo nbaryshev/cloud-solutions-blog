@@ -33,7 +33,6 @@ class NewPost(flask_wtf.FlaskForm):
 class SignUp(flask_wtf.FlaskForm):
     name = wtforms.StringField('Name: ', validators=[DataRequired()])
     email = wtforms.StringField('E-mail: ', validators=[DataRequired()])
-    user_image = wtforms.FileField('Picture')
     pwd = wtforms.PasswordField('Password: ', validators=[DataRequired()])
     submit = wtforms.SubmitField('Sign Up')
 
@@ -81,9 +80,3 @@ class NewComment(flask_wtf.FlaskForm):
         new_comment = models.Comment.create_comment(comment, post_id)
 
         return new_comment
-
-
-# class Upload(flask_wtf.FlaskForm):
-#
-#     image = wtforms.FileField('image')
-#     upload = wtforms.SubmitField('Upload')

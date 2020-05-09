@@ -72,12 +72,12 @@ class User(flask_login.UserMixin, db.Model):
         db.session.commit()
 
     @classmethod
-    def create_user(cls, name=None, email=None, pwd=None, user_image=None):
+    def create_user(cls, name=None, email=None, pwd=None):
         """
         creates new user
         """
 
-        new_user = cls(name=name, email=email, user_image=user_image)
+        new_user = cls(name=name, email=email)
         new_user.change_pwd(pwd)
 
         db.session.add(new_user)
