@@ -23,9 +23,9 @@ class NewPost(flask_wtf.FlaskForm):
         post_text = self.post_text.data
         image = images.save(self.image.data)
 
-
         # Creating a post
-        post = models.Post.create_post(topic=topic, heading=heading, post_preview=post_preview, post_text=post_text, post_image=image)
+        post = models.Post.create_post(topic=topic, heading=heading, post_preview=post_preview, post_text=post_text,
+                                       post_image=image)
 
         return post
 
@@ -58,7 +58,6 @@ class SignIn(flask_wtf.FlaskForm):
     submit = wtforms.SubmitField('Sign In')
 
     def signin_user(self):
-
         email = self.email.data
         pwd = self.pwd.data
         remember = self.remember.data
@@ -69,14 +68,58 @@ class SignIn(flask_wtf.FlaskForm):
 
 
 class NewComment(flask_wtf.FlaskForm):
-
     comment = wtforms.TextAreaField('Comment')
     submit = wtforms.SubmitField('Comment')
 
     def get_comment(self, post_id):
-
         comment = self.comment.data
-
         new_comment = models.Comment.create_comment(comment, post_id)
 
         return new_comment
+
+
+class UpdatePost(flask_wtf.FlaskForm):
+
+    topic = wtforms.SelectField('Choose the topic', choices=choices)
+    heading = wtforms.TextAreaField('Heading')
+    post_preview = wtforms.TextAreaField('Post preview')
+    post_text = wtforms.TextAreaField('Post text')
+    image = wtforms.FileField('Post image', [wtforms.validators.DataRequired()])
+    submit = wtforms.SubmitField('Update post')
+
+    def retrieve(self, topic, heading, post_preview, post_text, image):
+        self.topic.data = topic
+        self.heading.data = heading
+        self.post_preview.data = post_preview
+        self.post_text.data = post_text
+        self.image.data = image
+
+    def sending_updated_data(self):
+        topic_n = self.topic.data
+        heading_n = self.heading.data
+        post_preview_n = self.post_preview.data
+        post_text_n = self.post_text.data
+        post_image_n = images.save(self.image.data)
+
+        upd_data = models.Post.update_post(topic_n=topic_n, heading_n=heading_n, post_preview_n=post_preview_n, post_text_n=post_text_n, post_image_n=post_image_n)
+
+        return upd_data
+
+    # def update_post(self, post):
+    #     post = post
+    #     topic = self.topic.data
+    #     heading = self.heading.data
+    #     post_preview = self.post_preview.data
+    #     post_text = self.post_text.data
+    #     post_image = self.image.data
+    #
+    #     updated_post = models.Post.update_post(post=post, topic_n=topic, heading_n=heading, post_preview_n=post_preview, post_text_n=post_text, post_image_n=post_image)
+    #
+    #     return updated_post
+
+    # @classmethod
+    # def edit_data(cls, post_id):
+    #     post = models.Post.query.filter_by(post_id=post_id).first()
+    #     # form = UpdatePost(topic=post.topic, heading=post.heading, post_preview=post.post_preview, post_text=post.post_text, image=post.post_image)
+    #
+    #     return form

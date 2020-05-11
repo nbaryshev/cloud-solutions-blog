@@ -13,6 +13,11 @@
             <p class="post-meta meta-font">Posted on {{ post.get_human_time() }}</p>
             </div>
             <hr>
+            <div>
+                <p><a href="{{ url_for('edit', post_id=post.post_id) }}">Edit</a></p>
+            </div>
+
+<!--Comments block-->
         <h1><i>Comments</i></h1>
             {% if comments %}
             {% for comment in comments %}

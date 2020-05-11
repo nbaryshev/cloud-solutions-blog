@@ -1,4 +1,4 @@
-from app import app, models, db, forms
+from app import app, models, db, forms, images
 import flask, flask_login
 
 @app.route('/')
@@ -90,6 +90,33 @@ def post(topic, post_id):
         return flask.redirect(flask.url_for('post', topic=topic, post_id=post_id))
 
     return flask.render_template('post.jin', topic=topic, post=current_post, comments=comments, form=comment_form)
+
+
+@app.route('/<int:post_id>', methods=('GET', 'POST'))
+def edit(post_id):
+
+    post_el = models.Post.query.filter_by(post_id=post_id).first()
+    edit_post_form = forms.UpdatePost()
+
+    if flask.request.method == "POST":
+        if edit_post_form.validate_on_submit():
+
+            updated_post = edit_post_form.sending_updated_data()
+
+            # topic_n = edit_post_form.topic.data
+            # heading_n = edit_post_form.heading.data
+            # post_preview_n = edit_post_form.post_preview.data
+            # post_text_n = edit_post_form.post_text.data
+            # post_image_n = images.save(edit_post_form.image.data)
+            #
+            # post_el.update_post(topic_n, heading_n, post_preview_n, post_text_n, post_image_n)
+
+            # return flask.redirect(flask.url_for('post', topic=post_el.topic, post_id=post_el.post_id))
+            return flask.redirect(flask.url_for('post', topic=updated_post.topic, post_id=updated_post.post_id))
+
+    edit_post_form.retrieve(post_el.topic, post_el.heading, post_el.post_preview, post_el.post_text, post_el.post_image)
+
+    return flask.render_template('editpost.jin', form=edit_post_form)
 
 
 @app.route('/sign-up', methods=('GET', 'POST'))

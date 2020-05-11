@@ -2,6 +2,7 @@ from app import db, models, login_mngr
 import datetime, flask_login
 from werkzeug.security import check_password_hash, generate_password_hash
 
+
 class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String)
@@ -10,7 +11,7 @@ class Post(db.Model):
     post_text = db.Column(db.String)
     post_image = db.Column(db.String)
     post_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    comments = db.relationship('Comment', backref='post') # one Post may have many comments(one-to-many with Comments table) ?
+    comments = db.relationship('Comment', backref='post')
 
     @classmethod
     def create_post(cls, topic=None, heading=None, post_preview=None, post_text=None, post_time=None, post_image=None):
@@ -37,6 +38,21 @@ class Post(db.Model):
     def add_comment(self, comment):
         self.comments.append(comment)
         db.session.commit()
+
+    @classmethod
+    def update_post(cls, post_id=None, topic_n=None, heading_n=None, post_preview_n=None, post_text_n=None, post_image_n=None):
+        upd_post = cls(topic=topic_n, heading=heading_n, post_preview=post_preview_n, post_text=post_text_n, post_image=post_image_n)
+
+        db.session.commit()
+
+    # def update_post(self, topic_n=None, heading_n=None, post_preview_n=None, post_text_n=None, post_image_n=None):
+    #     self.topic = topic_n
+    #     self.heading = heading_n
+    #     self.post_preview = post_preview_n
+    #     self.post_text = post_text_n
+    #     self.post_image = post_image_n
+    #
+    #     db.session.commit()
 
 
 @login_mngr.user_loader

@@ -1,0 +1,54 @@
+{% extends 'base.jin' %}
+
+{% block main %}
+
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <br>
+
+<form action="" method = "POST" enctype="multipart/form-data" class="newpost">
+    {{ form.hidden_tag() }}
+
+        {{ form.csrf_token }}
+
+
+
+
+{{ form.topic.label }}<br>
+        {{ form.topic(class='custom-select', style='width:250px; height:44px')}}
+
+        <p>
+        {{ form.image.label }}<br>
+    <span class="custom-file">
+    <span class="custom-file-label">Choose file...</span>
+        {{ form.image(class="custom-file-input") }}
+    </span>
+        </p>
+
+        <p>
+        {{ form.heading.label }}
+        {{ form.heading(class="form-control") }}
+        </p>
+
+        <p>
+        {{ form.post_preview.label }}
+        {{ form.post_preview(class="form-control", style='height:100px') }}
+        </p>
+
+        <p>
+        {{ form.post_text.label }}
+        {{ form.post_text(class="form-control", style='height:200px') }}
+        </p>
+
+        <p>
+        {{ form.submit(class='btn-custom') }}
+        </p>
+
+
+    </form>
+
+</div>
+</div>
+
+{% endblock %}
