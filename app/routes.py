@@ -95,14 +95,16 @@ def post(topic, post_id):
 @app.route('/<int:post_id>', methods=('GET', 'POST'))
 def edit(post_id):
 
+    #Retrieve the post I want to edit
     post_el = models.Post.query.filter_by(post_id=post_id).first()
+
+    #Form for updating the post
     edit_post_form = forms.UpdatePost()
 
     if flask.request.method == "POST":
         if edit_post_form.validate_on_submit():
 
-            updated_post = edit_post_form.sending_updated_data()
-
+            # ##### The commented code works but it seems to be not professional to do so ####
             # topic_n = edit_post_form.topic.data
             # heading_n = edit_post_form.heading.data
             # post_preview_n = edit_post_form.post_preview.data
@@ -112,6 +114,10 @@ def edit(post_id):
             # post_el.update_post(topic_n, heading_n, post_preview_n, post_text_n, post_image_n)
 
             # return flask.redirect(flask.url_for('post', topic=post_el.topic, post_id=post_el.post_id))
+
+            # Here I want to retrieve the updated post using the functions in forms.py and models.py
+            updated_post = edit_post_form.sending_updated_data()
+
             return flask.redirect(flask.url_for('post', topic=updated_post.topic, post_id=updated_post.post_id))
 
     edit_post_form.retrieve(post_el.topic, post_el.heading, post_el.post_preview, post_el.post_text, post_el.post_image)

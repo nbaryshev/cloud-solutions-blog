@@ -87,6 +87,7 @@ class UpdatePost(flask_wtf.FlaskForm):
     image = wtforms.FileField('Post image', [wtforms.validators.DataRequired()])
     submit = wtforms.SubmitField('Update post')
 
+    # Pre-filling the form by data from the post
     def retrieve(self, topic, heading, post_preview, post_text, image):
         self.topic.data = topic
         self.heading.data = heading
@@ -94,6 +95,7 @@ class UpdatePost(flask_wtf.FlaskForm):
         self.post_text.data = post_text
         self.image.data = image
 
+    # sending the updated data to the table
     def sending_updated_data(self):
         topic_n = self.topic.data
         heading_n = self.heading.data
@@ -104,22 +106,3 @@ class UpdatePost(flask_wtf.FlaskForm):
         upd_data = models.Post.update_post(topic_n=topic_n, heading_n=heading_n, post_preview_n=post_preview_n, post_text_n=post_text_n, post_image_n=post_image_n)
 
         return upd_data
-
-    # def update_post(self, post):
-    #     post = post
-    #     topic = self.topic.data
-    #     heading = self.heading.data
-    #     post_preview = self.post_preview.data
-    #     post_text = self.post_text.data
-    #     post_image = self.image.data
-    #
-    #     updated_post = models.Post.update_post(post=post, topic_n=topic, heading_n=heading, post_preview_n=post_preview, post_text_n=post_text, post_image_n=post_image)
-    #
-    #     return updated_post
-
-    # @classmethod
-    # def edit_data(cls, post_id):
-    #     post = models.Post.query.filter_by(post_id=post_id).first()
-    #     # form = UpdatePost(topic=post.topic, heading=post.heading, post_preview=post.post_preview, post_text=post.post_text, image=post.post_image)
-    #
-    #     return form
