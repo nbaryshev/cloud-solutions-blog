@@ -96,13 +96,14 @@ class UpdatePost(flask_wtf.FlaskForm):
         self.image.data = image
 
     # sending the updated data to the table
-    def sending_updated_data(self):
+    def sending_updated_data(self, post_id):
         topic_n = self.topic.data
         heading_n = self.heading.data
         post_preview_n = self.post_preview.data
         post_text_n = self.post_text.data
         post_image_n = images.save(self.image.data)
 
-        upd_data = models.Post.update_post(topic_n=topic_n, heading_n=heading_n, post_preview_n=post_preview_n, post_text_n=post_text_n, post_image_n=post_image_n)
+        post = models.Post.query.filter_by(post_id=post_id).first()
+        post.update_post(topic_n=topic_n, heading_n=heading_n, post_preview_n=post_preview_n, post_text_n=post_text_n, post_image_n=post_image_n)
 
-        return upd_data
+        return post

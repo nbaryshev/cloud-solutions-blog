@@ -39,23 +39,20 @@ class Post(db.Model):
         self.comments.append(comment)
         db.session.commit()
 
-    @classmethod
-    def update_post(cls, topic_n=None, heading_n=None, post_preview_n=None, post_text_n=None, post_image_n=None):
-        upd_post = cls(topic=topic_n, heading=heading_n, post_preview=post_preview_n, post_text=post_text_n, post_image=post_image_n)
-
-        db.session.commit()
-
-        return upd_post
+    # # @classmethod
+    # def update_post(cls, topic_n=None, heading_n=None, post_preview_n=None, post_text_n=None, post_image_n=None):
+    #     upd_post = cls(topic=topic_n, heading=heading_n, post_preview=post_preview_n, post_text=post_text_n, post_image=post_image_n)
+    #     db.session.commit()
 
     ##### This approach works with commented code in the route ####
-    # def update_post(self, topic_n=None, heading_n=None, post_preview_n=None, post_text_n=None, post_image_n=None):
-    #     self.topic = topic_n
-    #     self.heading = heading_n
-    #     self.post_preview = post_preview_n
-    #     self.post_text = post_text_n
-    #     self.post_image = post_image_n
-    #
-    #     db.session.commit()
+    def update_post(self, topic_n=None, heading_n=None, post_preview_n=None, post_text_n=None, post_image_n=None):
+        self.topic = topic_n
+        self.heading = heading_n
+        self.post_preview = post_preview_n
+        self.post_text = post_text_n
+        self.post_image = post_image_n
+
+        db.session.commit()
 
 
 @login_mngr.user_loader

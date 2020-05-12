@@ -115,8 +115,8 @@ def edit(post_id):
 
             # return flask.redirect(flask.url_for('post', topic=post_el.topic, post_id=post_el.post_id))
 
-            # Here I want to retrieve the updated post using the functions in forms.py and models.py
-            updated_post = edit_post_form.sending_updated_data()
+            # #### Here I want to retrieve the updated post using the functions in forms.py and models.py
+            updated_post = edit_post_form.sending_updated_data(post_id)
 
             return flask.redirect(flask.url_for('post', topic=updated_post.topic, post_id=updated_post.post_id))
 

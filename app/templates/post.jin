@@ -12,10 +12,11 @@
             <div class="post-preview">
             <p class="post-meta meta-font">Posted on {{ post.get_human_time() }}</p>
             </div>
-            <hr>
-            <div>
-                <p><a href="{{ url_for('edit', post_id=post.post_id) }}">Edit</a></p>
+              <div>
+                <p><a href="{{ url_for('edit', post_id=post.post_id) }}" class="managing-posts">Edit</a></p>
             </div>
+            <hr>
+
 
 <!--Comments block-->
         <h1><i>Comments</i></h1>
